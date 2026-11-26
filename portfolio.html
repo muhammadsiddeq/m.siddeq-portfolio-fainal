@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Muhammad Siddeq</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #0d0716;
+      --bg-card: #160d26;
+      --purple-primary: #9333ea;
+      --purple-light: #c084fc;
+      --purple-glow: rgba(147, 51, 234, 0.45);
+      --gradient-primary: linear-gradient(135deg, #7e22ce 0%, #a855f7 50%, #ec4899 100%);
+      --text-main: #f8fafc;
+      --text-muted: #a1a1aa;
+      --border-subtle: rgba(168, 85, 247, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(147, 51, 234, 0.16) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body::before {
+      top: -100px;
+      left: -100px;
+    }
+
+    body::after {
+      bottom: -120px;
+      right: -100px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(13, 7, 22, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-main);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .btn-gradient {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.3rem;
+      background: var(--gradient-primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 18px rgba(147, 51, 234, 0.35);
+      white-space: nowrap;
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(168, 85, 247, 0.6);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.4rem;
+      border: 1px solid var(--purple-light);
+      color: var(--text-main);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background: rgba(168, 85, 247, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 26px;
+      height: 2.5px;
+      background: var(--text-main);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .hero {
+      padding: 4rem 1.5rem 2.2rem;
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .hero-content {
+      text-align: left;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .subtitle {
+      font-size: 1.12rem;
+      color: var(--purple-light);
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero .intro {
+      color: var(--text-muted);
+      font-size: 0.97rem;
+      max-width: 620px;
+    }
+
+    .hero-avatar-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-avatar {
+      width: 210px;
+      height: 210px;
+      border-radius: 24px;
+      padding: 4px;
+      background: var(--gradient-primary);
+      box-shadow: 0 12px 35px var(--purple-glow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .hero-avatar:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 42px rgba(168, 85, 247, 0.65);
+    }
+
+    .hero-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 20px;
+      display: block;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+      margin: 2rem 0 3rem;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.35rem;
+      border-radius: 50px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-main);
+      border-color: var(--purple-light);
+    }
+
+    .filter-btn.active {
+      background: var(--gradient-primary);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 18px var(--purple-glow);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--purple-light);
+      box-shadow: 0 12px 35px var(--purple-glow);
+    }
+
+    .project-thumb {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: #1f1135;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .project-card:hover .project-thumb img {
+      transform: scale(1.08);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+      flex-grow: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .tech-tag {
+      font-size: 0.76rem;
+      font-weight: 500;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      background: rgba(168, 85, 247, 0.14);
+      color: var(--purple-light);
+      border: 1px solid rgba(168, 85, 247, 0.28);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.85rem;
+    }
+
+    .btn-card {
+      flex: 1;
+      text-align: center;
+      padding: 0.58rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-demo {
+      background: var(--gradient-primary);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 14px rgba(147, 51, 234, 0.35);
+    }
+
+    .btn-demo:hover {
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .btn-code {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-code:hover {
+      border-color: var(--purple-light);
+      background: rgba(168, 85, 247, 0.12);
+    }
+
+    .cta-section {
+      background: linear-gradient(145deg, #170d29 0%, #22113d 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      margin-bottom: 4rem;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 4, 16, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 2000;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--purple-light);
+      border-radius: 18px;
+      max-width: 640px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 15px 45px var(--purple-glow);
+      position: relative;
+      max-height: 88vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+    }
+
+    .modal-box h3 {
+      margin-bottom: 0.6rem;
+      color: var(--purple-light);
+    }
+
+    .modal-box p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .code-snippet-box {
+      background: #090412;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1rem;
+      color: #e2e8f0;
+      font-family: Consolas, Monaco, 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      overflow-x: auto;
+      white-space: pre;
+      margin-bottom: 1rem;
+    }
+
+    .modal-code-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .hire-contact-panel {
+      text-align: center;
+      padding: 1.1rem;
+      border-radius: 14px;
+      background: #0b0514;
+      border: 1px solid rgba(232, 121, 249, 0.35);
+      margin-top: 0.5rem;
+    }
+
+    .hire-phone-number {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #f0abfc;
+      margin: 0.35rem 0 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hire-contact-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .hire-action-btn {
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(232, 121, 249, 0.45);
+      background: #1d0c33;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .hire-action-btn:hover {
+      background: #2e1352;
+      transform: translateY(-2px);
+    }
+
+    .hire-copied-text {
+      margin-top: 0.65rem;
+      font-size: 0.85rem;
+      color: #86efac;
+      min-height: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #120920;
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid var(--border-subtle);
+        display: none;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+        padding-top: 3rem;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero .intro {
+        margin: 0 auto;
+      }
+
+      .hero-avatar {
+        width: 175px;
+        height: 175px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">Muhammad <span>Siddeq</span></a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html" class="active">Portfolio</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#hire-me" class="btn-gradient hire-me-btn">Hire Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="portfolio">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>My Creative <span>Portfolio</span></h1>
+        <p class="subtitle">Explore my latest projects and creative work.</p>
+        <p class="intro">
+          I specialize in building fast, responsive, and visually engaging websites using clean HTML, modern CSS, and interactive JavaScript—turning ideas into seamless digital experiences.
+        </p>
+      </div>
+
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar">
+          <img src="muhammad siddeq .jpg.png" alt="Muhammad Siddeq - Web Developer" />
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="filter-bar" role="tablist" aria-label="Project Categories">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="web-design">Web Design</button>
+        <button class="filter-btn" data-filter="web-development">Web Development</button>
+        <button class="filter-btn" data-filter="responsive">Responsive Websites</button>
+      </div>
+
+      <section class="projects-grid" id="projectsGrid"></section>
+
+      <section class="cta-section">
+        <h2>Have a project in mind? Let's work together!</h2>
+        <div class="cta-actions">
+          <a href="#hire-me" class="btn-gradient hire-me-btn">Hire Me</a>
+          <a href="reviews.html" class="btn-outline">Reviews</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Muhammad Siddeq. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Hire Me Direct Contact Modal -->
+  <div class="modal" id="hireContactModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="hireModalClose" aria-label="Close contact modal">&times;</button>
+      <h3 style="text-align: center;">Hire Me — Direct Contact</h3>
+      <p style="text-align: center;">Call, WhatsApp, or copy my contact number directly:</p>
+      <div class="hire-contact-panel">
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Direct Contact Number</div>
+        <div id="hirePhoneText" class="hire-phone-number">03115609721</div>
+        <div class="hire-contact-actions">
+          <button type="button" id="hireCopyBtn" class="hire-action-btn">Copy Number</button>
+          <a href="tel:03115609721" class="hire-action-btn">Call Now</a>
+          <a href="https://wa.me/923115609721" target="_blank" rel="noopener noreferrer" class="hire-action-btn">WhatsApp</a>
+        </div>
+        <div id="hireCopiedMsg" class="hire-copied-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Source Code Modal -->
+  <div class="modal" id="projectModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+      <h3 id="modalTitle">Project Source Code</h3>
+      <p id="modalDesc">Source code preview for this project:</p>
+      <pre class="code-snippet-box" id="codeSnippetBox"></pre>
+      <div class="modal-code-actions">
+        <button type="button" class="btn-gradient" id="copyCodeBtn">Copy Code</button>
+        <a href="https://muhammadsiddeq.github.io/muhammad-siddeq-portfolio/" target="_blank" rel="noopener noreferrer" class="btn-outline" id="githubRepoLink" style="display: none;">Open GitHub Repo</a>
+        <span id="codeCopiedStatus" style="font-size: 0.85rem; color: #86efac;"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function createFallbackImg(title, badge, c1, c2) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${c1}"/>
+            <stop offset="100%" stop-color="${c2}"/>
+          </linearGradient>
+        </defs>
+        <rect width="800" height="450" fill="url(#g)"/>
+        <rect x="60" y="65" width="680" height="320" rx="22" fill="rgba(13,7,22,0.58)" stroke="rgba(255,255,255,0.22)"/>
+        <text x="100" y="135" fill="#e9d5ff" font-family="Poppins, Arial, sans-serif" font-size="22" font-weight="600" letter-spacing="2">${badge}</text>
+        <text x="100" y="220" fill="#ffffff" font-family="Poppins, Arial, sans-serif" font-size="48" font-weight="700">${title}</text>
+      </svg>`;
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    }
+
+    const periodicTableImg = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+      <rect width="800" height="450" fill="#ffffff"/>
+      <rect width="800" height="86" fill="#ffff4d"/>
+      <text x="400" y="58" text-anchor="middle" fill="#000000" font-family="Arial, sans-serif" font-size="52" font-weight="900">The Periodic Table</text>
+      <g font-family="Arial, sans-serif" font-weight="700" font-size="13" text-anchor="middle" stroke="#1e293b" stroke-width="1.2">
+        <rect x="18" y="102" width="38" height="38" fill="#fdba74"/><text x="37" y="116" stroke="none" font-size="9">1</text><text x="37" y="132" stroke="none">H</text>
+        <rect x="744" y="102" width="38" height="38" fill="#e0e7ff"/><text x="763" y="116" stroke="none" font-size="9">2</text><text x="763" y="132" stroke="none">He</text>
+        <rect x="18" y="144" width="38" height="38" fill="#e9d5ff"/><text x="37" y="158" stroke="none" font-size="9">3</text><text x="37" y="174" stroke="none">Li</text>
+        <rect x="60" y="144" width="38" height="38" fill="#93c5fd"/><text x="79" y="158" stroke="none" font-size="9">4</text><text x="79" y="174" stroke="none">Be</text>
+        <rect x="534" y="144" width="38" height="38" fill="#ca8a04"/><text x="553" y="158" stroke="none" font-size="9">5</text><text x="553" y="174" stroke="none">B</text>
+        <rect x="576" y="144" width="38" height="38" fill="#fdba74"/><text x="595" y="158" stroke="none" font-size="9">6</text><text x="595" y="174" stroke="none">C</text>
+        <rect x="618" y="144" width="38" height="38" fill="#fdba74"/><text x="637" y="158" stroke="none" font-size="9">7</text><text x="637" y="174" stroke="none">N</text>
+        <rect x="660" y="144" width="38" height="38" fill="#fdba74"/><text x="679" y="158" stroke="none" font-size="9">8</text><text x="679" y="174" stroke="none">O</text>
+        <rect x="702" y="144" width="38" height="38" fill="#fef08a"/><text x="721" y="158" stroke="none" font-size="9">9</text><text x="721" y="174" stroke="none">F</text>
+        <rect x="744" y="144" width="38" height="38" fill="#e0e7ff"/><text x="763" y="158" stroke="none" font-size="9">10</text><text x="763" y="174" stroke="none">Ne</text>
+      </g>
+    </svg>`);
+
+    const projects = [
+      {
+        title: "Chessbox",
+        description: "Interactive chess web experience with a clean board layout, responsive styling, and smooth user interactions.",
+        category: ["web-design", "web-development"],
+        tags: ["HTML", "CSS", "JavaScript"],
+        image: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=800&q=80",
+        fallback: createFallbackImg("Chessbox", "CHESS WEB APP", "#3b0764", "#1e1b4b"),
+        liveUrl: "https://muhammadsiddeq.github.io/chessbox/",
+        repoUrl: "https://muhammadsiddeq.github.io/chessbox/",
+        codeSample: `<!-- Chessbox Layout Snippet -->
+<div class="chessbox-board">
+  <div class="square light"></div>
+  <div class="square dark"></div>
+</div>
+<script>
+  const squares = document.querySelectorAll(".square");
+  squares.forEach(sq => sq.addEventListener("click", () => sq.classList.toggle("selected")));
+<\/script>`
+      },
+      {
+        title: "Siddeq Benjamin",
+        description: "Modern responsive website featuring clean sections, structured cards, and mobile-friendly layout.",
+        category: ["web-design", "web-development", "responsive"],
+        tags: ["HTML", "CSS", "JavaScript"],
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+        fallback: createFallbackImg("Siddeq Benjamin", "RESPONSIVE WEBSITE", "#4c1d95", "#172554"),
+        liveUrl: "https://muhammadsiddeq.github.io/siddeq-benjamin/",
+        repoUrl: "https://muhammadsiddeq.github.io/siddeq-benjamin/",
+        codeSample: `<!-- Siddeq Benjamin Section Snippet -->
+<section class="benjamin-hero">
+  <h1>Siddeq Benjamin</h1>
+  <p>Clean responsive web layout built with HTML & CSS.</p>
+</section>`
+      },
+      {
+        title: "Siddeq Urban",
+        description: "Responsive web storefront experience with clean sections, cards, and mobile-friendly navigation.",
+        category: ["web-design", "web-development", "responsive"],
+        tags: ["HTML", "CSS", "JavaScript"],
+        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
+        fallback: createFallbackImg("Siddeq Urban", "URBAN CLOTHING STORE", "#581c87", "#831843"),
+        liveUrl: "https://muhammadsiddeq.github.io/siddeq-urban/",
+        repoUrl: "https://muhammadsiddeq.github.io/siddeq-urban/",
+        codeSample: `<!-- Siddeq Urban Storefront Card -->
+<article class="urban-card">
+  <h3>Siddeq Urban Collection</h3>
+  <p>Responsive grid layout for modern web storefronts.</p>
+</article>`
+      },
+      {
+        title: "Siddeq Bulub-On",
+        description: "Creative responsive web project built with structured layouts, clear typography, and cross-device support.",
+        category: ["web-design", "web-development", "responsive"],
+        tags: ["HTML", "CSS", "JavaScript"],
+        image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80",
+        fallback: createFallbackImg("Siddeq Bulub-On", "LIGHT BULB PROJECT", "#6b21a8", "#312e81"),
+        liveUrl: "https://muhammadsiddeq.github.io/siddeq-bulub-on/",
+        repoUrl: "https://muhammadsiddeq.github.io/siddeq-bulub-on/",
+        codeSample: `<!-- Siddeq Bulub-On Container -->
+<main class="bulubon-wrapper">
+  <h2>Siddeq Bulub-On</h2>
+  <p>Structured layout with responsive styling.</p>
+</main>`
+      },
+      {
+        title: "Siddeq Table",
+        description: "Clean and responsive HTML/CSS table layout with structured rows, clear styling, and mobile-friendly viewing.",
+        category: ["web-design", "responsive"],
+        tags: ["HTML", "CSS", "Table UI"],
+        image: periodicTableImg,
+        fallback: createFallbackImg("Siddeq Table", "PERIODIC TABLE", "#701a75", "#1e1b4b"),
+        liveUrl: "https://muhammadsiddeq.github.io/siddeq-table/",
+        repoUrl: "https://muhammadsiddeq.github.io/siddeq-table/",
+        codeSample: `<!-- Siddeq Table Snippet -->
+<table class="data-table">
+  <thead>
+    <tr><th>Item</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Row 01</td><td>Active</td></tr>
+  </tbody>
+</table>`
+      },
+      {
+        title: "JavaScript Operators",
+        description: "Interactive learning page demonstrating JavaScript operators with practical examples and clean UI.",
+        category: ["web-development", "responsive"],
+        tags: ["HTML", "CSS", "JavaScript"],
+        image: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&w=800&q=80",
+        fallback: createFallbackImg("JavaScript Operators", "JS OPERATORS DEMO", "#4a044e", "#2e1065"),
+        liveUrl: "https://muhammadsiddeq.github.io/js-operators/",
+        repoUrl: "https://muhammadsiddeq.github.io/js-operators/",
+        codeSample: `// JavaScript Operators Example
+let a = 10;
+let b = 5;
+console.log("Sum:", a + b);
+console.log("Is Greater:", a > b);`
+      }
+    ];
+
+    const projectsGrid = document.getElementById("projectsGrid");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const modal = document.getElementById("projectModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const codeSnippetBox = document.getElementById("codeSnippetBox");
+    const copyCodeBtn = document.getElementById("copyCodeBtn");
+    const githubRepoLink = document.getElementById("githubRepoLink");
+    const codeCopiedStatus = document.getElementById("codeCopiedStatus");
+    const modalClose = document.getElementById("modalClose");
+
+    const hireContactModal = document.getElementById("hireContactModal");
+    const hireModalClose = document.getElementById("hireModalClose");
+    const hireCopyBtn = document.getElementById("hireCopyBtn");
+    const hirePhoneText = document.getElementById("hirePhoneText");
+    const hireCopiedMsg = document.getElementById("hireCopiedMsg");
+
+    function renderProjects(filter = "all") {
+      projectsGrid.innerHTML = "";
+      const filtered = filter === "all"
+        ? projects
+        : projects.filter(project => project.category.includes(filter));
+
+      filtered.forEach((project, index) => {
+        const card = document.createElement("article");
+        card.className = "project-card";
+        const tagsHTML = project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join("");
+
+        card.innerHTML = `
+          <div class="project-thumb">
+            <img src="${project.image}" alt="${project.title}" loading="lazy" onerror="this.onerror=null;this.src='${project.fallback}';" />
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-desc">${project.description}</p>
+            <div class="tech-tags">${tagsHTML}</div>
+            <div class="card-actions">
+              <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-card btn-demo">View Demo</a>
+              <button class="btn-card btn-code" data-index="${index}" data-title="${project.title}">View Code</button>
+            </div>
+          </div>
+        `;
+        projectsGrid.appendChild(card);
+      });
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        renderProjects(button.dataset.filter);
+      });
+    });
+
+    menuToggle.addEventListener("click", () => navLinks.classList.toggle("show"));
+
+    document.querySelectorAll(".hire-me-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        navLinks.classList.remove("show");
+        hireCopiedMsg.textContent = "";
+        hireContactModal.classList.add("open");
+      });
+    });
+
+    hireModalClose.addEventListener("click", () => hireContactModal.classList.remove("open"));
+    hireContactModal.addEventListener("click", (e) => {
+      if (e.target === hireContactModal) hireContactModal.classList.remove("open");
+    });
+
+    hireCopyBtn.addEventListener("click", () => {
+      const numberToCopy = hirePhoneText.textContent.trim();
+      navigator.clipboard.writeText(numberToCopy).then(() => {
+        hireCopiedMsg.textContent = "Number copied!";
+        setTimeout(() => { hireCopiedMsg.textContent = ""; }, 2000);
+      }).catch(() => {
+        hireCopiedMsg.textContent = numberToCopy;
+      });
+    });
+
+    projectsGrid.addEventListener("click", (e) => {
+      const codeBtn = e.target.closest("button.btn-code");
+      if (codeBtn) {
+        const idx = Number(codeBtn.dataset.index);
+        const item = projects[idx];
+        modalTitle.textContent = `${item.title} — Source Code`;
+        modalDesc.textContent = "Code preview for this project:";
+        codeSnippetBox.textContent = item.codeSample;
+        codeCopiedStatus.textContent = "";
+
+        if (item.repoUrl) {
+          githubRepoLink.href = item.repoUrl;
+          githubRepoLink.style.display = "inline-flex";
+        } else {
+          githubRepoLink.style.display = "none";
+        }
+
+        modal.classList.add("open");
+      }
+    });
+
+    copyCodeBtn.addEventListener("click", () => {
+      const codeText = codeSnippetBox.textContent;
+      navigator.clipboard.writeText(codeText).then(() => {
+        codeCopiedStatus.textContent = "Code copied!";
+        setTimeout(() => { codeCopiedStatus.textContent = ""; }, 2000);
+      }).catch(() => {
+        codeCopiedStatus.textContent = "Select and copy manually.";
+      });
+    });
+
+    modalClose.addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+
+    renderProjects();
+  </script>
+</body>
+</html>
